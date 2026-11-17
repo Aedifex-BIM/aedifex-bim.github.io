@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aedifex · agentic BIM, free</title>
+<meta name="description" content="Aedifex is a free desktop BIM app where an AI agent models the building, the structure and the rebar from what you write, and you check the result. macOS and Windows.">
+<meta name="theme-color" content="#0d0f11">
+<link rel="icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add("js");</script>
+<script src="downloads/config.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar" id="top">
+  <a class="brand" href="#top" aria-label="Aedifex, back to top">
+    <img src="img/icon-256.png" alt="" width="28" height="28">
+    <span>Aedifex</span>
+  </a>
+  <nav class="nav" aria-label="Sections">
+    <a href="#agent">Agent</a>
+    <a href="#model">Model</a>
+    <a href="#documents">Structure &amp; drawings</a>
+    <a href="#download">Download</a>
+  </nav>
+  <a class="btn btn-signal btn-sm" href="#download">Download free</a>
+</header>
+
+<main id="main">
+
+<!-- 1 hero -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <p class="kicker"><span class="bubble" aria-hidden="true">A</span>Agentic BIM · freeware · macOS and Windows</p>
+    <h1 id="hero-title"><span class="wide">Say the building.</span> <span class="narrow">Check the model.</span></h1>
+    <p class="lede">Aedifex is a desktop BIM app where an AI agent draws the walls, frames the structure and places the rebar from what you write. Every step is a real model command you can see, undo and edit by hand.</p>
+    <div class="cta">
+      <a class="btn btn-signal" href="#download" data-dl="mac">Download for macOS</a>
+      <a class="btn btn-line" href="#download" data-dl="win">Download for Windows</a>
+    </div>
+    <p class="fine" id="hero-version">Free for any use, commercial included. No account.</p>
+  </div>
+
+  <figure class="stage" aria-label="An agent building a two-storey frame, step by step">
+    <div class="stage-head">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="mono stage-title">assistant · 2-storey frame</span>
+      <button class="stage-replay" type="button" aria-label="Replay the build">Replay</button>
+    </div>
+    <div class="stage-canvas">
+      <svg id="build" viewBox="0 0 640 420" role="img" aria-label="Axonometric drawing of a concrete frame: grid, columns, beams, slabs, walls and the rebar of one beam"></svg>
+      <noscript><img class="stage-fallback" src="img/frame-wide.jpg" alt="A two-storey concrete frame on piles in Aedifex's 3D view"></noscript>
+    </div>
+    <ol class="calls" id="calls" aria-live="polite"></ol>
+  </figure>
+</section>
+
+<!-- 2 title block facts -->
+<section class="titleblock" aria-label="Aedifex at a glance">
+  <dl>
+    <div><dt>Runs on</dt><dd><span>macOS 11+</span> <span>Windows 10+</span></dd></div>
+    <div><dt>Reads</dt><dd><span>Revit 2023+</span> <span>IFC2x3</span> <span>IFC4</span> <span>DXF</span> <span>OBJ</span> <span>glTF</span></dd></div>
+    <div><dt>Writes</dt><dd><span>IFC4</span> <span>PDF sheets</span> <span>DXF</span> <span>SVG</span> <span>xlsx</span></dd></div>
+    <div><dt>Agent</dt><dd><span>Built in,</span> <span>or Claude Code</span> <span>or Codex</span></dd></div>
+    <div><dt>Tools for agents</dt><dd><span>102 over MCP</span></dd></div>
+    <div><dt>Price</dt><dd class="signal">Free</dd></div>
+  </dl>
+</section>
+
+<!-- 3 agent: the screenshot leads -->
+<section class="agent" id="agent" aria-labelledby="agent-title">
+  <div class="agent-grid">
+    <figure class="shot shot-tall">
+      <img src="img/assistant.jpg" alt="The Assistant panel: tool-call rows for add_walls and show_picture, the plan picture the agent looked at, a refused render request and its summary" loading="lazy" width="577" height="1047">
+      <figcaption><span class="mono">01</span> After a run: tool rows, the picture it checked, one refused request.</figcaption>
+    </figure>
+    <div class="agent-text">
+      <header class="sec-head">
+        <span class="bubble" aria-hidden="true">1</span>
+        <h2 id="agent-title">The agent works in the model, not beside it.</h2>
+      </header>
+      <p>The Assistant plans, calls Aedifex's own commands and looks at the result before it answers. The views follow its working copy live. When it finishes, its whole run is one undo step.</p>
+      <ul class="ticks">
+        <li>Each tool call is a row you can open: the command, its arguments, the reply.</li>
+        <li>It asks before it exports files, renders or runs an analysis you did not ask for.</li>
+        <li>Pick the model: OpenRouter, OpenAI-compatible, DeepSeek, Ollama, vLLM, or run Claude Code or Codex as the agent.</li>
+      </ul>
+      <figure class="shot shot-side">
+        <img src="img/providers.jpg" alt="Assistant settings: the seven model providers, Claude Code chosen and found on this computer" loading="lazy" width="720" height="392">
+        <figcaption><span class="mono">02</span> Claude Code and Codex use your own login.</figcaption>
+      </figure>
+      <div class="snippet">
+        <p class="mono label">Or drive it from your own agent over MCP</p>
+<pre><code>claude mcp add aedifex -- \
+  /Applications/Aedifex.app/Contents/MacOS/aedifex --mcp</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 model -->
+<section class="model" id="model" aria-labelledby="model-title">
+  <header class="sec-head">
+    <span class="bubble" aria-hidden="true">2</span>
+    <h2 id="model-title">A full modeller when you want the pencil back.</h2>
+  </header>
+  <div class="bento">
+    <figure class="cell lead">
+      <img src="img/render.jpg" alt="Path-traced render of a two-storey house with a hipped roof, sun and shadows" loading="lazy" width="1222" height="1047">
+      <figcaption><strong>Walls to render.</strong> Layered walls, doors and windows from families, floors, roofs, stairs, ramps and rooms, and a path-traced sun study in the same window.</figcaption>
+    </figure>
+    <figure class="cell wide">
+      <img src="img/curved.jpg" alt="A house with two curved walls, one with windows in its bay" loading="lazy" width="1137" height="882">
+      <figcaption><strong>Curved walls</strong> with doors and windows along the arc, written to IFC as true arcs.</figcaption>
+    </figure>
+    <figure class="cell">
+      <img src="img/modify.jpg" alt="Rotate tool previewing a quarter turn of a partition wall, with the Modify card below the plan" loading="lazy" width="1044" height="1143">
+      <figcaption><strong>Edit tools.</strong> Move, copy, rotate, mirror, array, offset, trim, split; joined walls stay joined.</figcaption>
+    </figure>
+    <figure class="cell">
+      <img class="anchor-left" src="img/family.jpg" alt="Family editor: name, category, parameters with kinds and defaults, and a 3D preview of a pedestal table" loading="lazy" width="1440" height="790">
+      <figcaption><strong>Your own families.</strong> Parameters, formulas, types and a live preview.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 5 structure and drawings: a set of sheets -->
+<section class="docs" id="documents" aria-labelledby="docs-title">
+  <header class="sec-head">
+    <span class="bubble" aria-hidden="true">3</span>
+    <h2 id="docs-title">From frame to bar schedule, on sheets.</h2>
+    <div class="strip-nav">
+      <button class="strip-btn" type="button" data-dir="-1" aria-label="Previous sheet">Prev</button>
+      <button class="strip-btn" type="button" data-dir="1" aria-label="Next sheet">Next</button>
+    </div>
+  </header>
+  <div class="sheets" tabindex="0" aria-label="Sheets: structure and drawings">
+    <figure class="sheet lead">
+      <img src="img/frame-wide.jpg" alt="Concrete frame with columns, beams, slabs, pile caps and piles in 3D" loading="lazy" width="1224" height="656">
+      <figcaption><span class="mono">S-101</span><span>Frame, footings and piles from the grid in a few commands.</span></figcaption>
+    </figure>
+    <figure class="sheet">
+      <img class="anchor-left" src="img/pondus.jpg" alt="Design in Pondus card: loads, materials, covers and design options" loading="lazy" width="1104" height="1080">
+      <figcaption><span class="mono">S-102</span><span>Design in Pondus to ACI 318-19 and AISC or EC3.</span></figcaption>
+    </figure>
+    <figure class="sheet">
+      <img src="img/reinforce.jpg" alt="Reinforce card for a beam: top and bottom bars, stirrup zones, hooks and an ACI check with 8 rules passing" loading="lazy" width="630" height="897">
+      <figcaption><span class="mono">S-103</span><span>Rebar by hand or by design, checked against ACI 318-19.</span></figcaption>
+    </figure>
+    <figure class="sheet paper">
+      <img src="img/beam-bars.jpg" alt="Section through a reinforced beam: four bottom bars, two top bars and the stirrup with its hook" loading="lazy" width="640" height="760">
+      <figcaption><span class="mono">S-104</span><span>Sections cut the bars; bending schedules give cut lengths and kilograms.</span></figcaption>
+    </figure>
+    <figure class="sheet paper">
+      <img src="img/section.jpg" alt="Section through a two-storey house: layered walls, slabs, grids, levels, dimensions and a note" loading="lazy" width="1242" height="792">
+      <figcaption><span class="mono">A-201</span><span>Sections and elevations with dimensions, tags and spot levels.</span></figcaption>
+    </figure>
+    <figure class="sheet paper">
+      <img src="img/sheet.jpg" alt="A plan, a section and an elevation placed on an A1 sheet" loading="lazy" width="1263" height="384">
+      <figcaption><span class="mono">A-301</span><span>Views placed on sheets at a scale, printed to PDF.</span></figcaption>
+    </figure>
+    <figure class="sheet">
+      <img src="img/schedule.jpg" alt="Room schedule grouped by level: area, a calculated floor cost column, subtotals and a grand total" loading="lazy" width="1079" height="793">
+      <figcaption><span class="mono">A-401</span><span>Schedules with your own parameters, formulas and totals, to xlsx.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 6 download: the title block on paper -->
+<section class="download" id="download" aria-labelledby="dl-title">
+  <header class="sec-head">
+    <span class="bubble" aria-hidden="true">4</span>
+    <h2 id="dl-title">Download. It's free.</h2>
+  </header>
+  <div class="dl-sheet">
+    <div class="dl-cards">
+      <article class="dl-card" data-platform="mac">
+        <h3>macOS</h3>
+        <p class="meta">Universal (Apple silicon and Intel) · macOS 11 or later</p>
+        <a class="btn btn-signal dl-link" href="#download" aria-disabled="true">Preparing download</a>
+        <p class="hash mono"></p>
+      </article>
+      <article class="dl-card" data-platform="win">
+        <h3>Windows</h3>
+        <p class="meta">x86_64 · Windows 10 or later</p>
+        <a class="btn btn-line dl-link" href="#download" aria-disabled="true">Preparing download</a>
+        <p class="hash mono"></p>
+      </article>
+    </div>
+    <div class="tb" aria-label="Release title block">
+      <div class="tb-row"><span class="tb-k">Project</span><span class="tb-v tb-big">Aedifex</span></div>
+      <div class="tb-row"><span class="tb-k">Version</span><span class="tb-v mono" id="dl-version">0.1.0</span></div>
+      <div class="tb-row"><span class="tb-k">Licence</span><span class="tb-v">Freeware. Use it for any work, commercial included; share the unmodified download. <a href="downloads/LICENSE-FREEWARE.txt">Read the licence</a></span></div>
+      <div class="tb-row"><span class="tb-k">First open on a Mac</span><span class="tb-v">The app is not notarised: right-click it, choose Open, then Open again.</span></div>
+      <div class="tb-row"><span class="tb-k">In the zip</span><span class="tb-v">The app (it is also the MCP server and the command line), example projects, the licence and notices.</span></div>
+      <div class="tb-foot"><span>Sheet</span><span class="mono">D-001</span><span>Scale</span><span class="mono">1 : 1</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="colophon">
+  <div class="colo-grid">
+    <p class="colo-mark"><img src="img/icon-256.png" alt="" width="40" height="40"> Aedifex</p>
+    <p>Made at AI Research Group, KMUTT. Some modelling features follow the open-source BIMCraft project; the agent runs on the TellusHive engine.</p>
+    <p class="mono">© 2026 Sompote Youwai · freeware</p>
+  </div>
+</footer>
+</body>
+</html>

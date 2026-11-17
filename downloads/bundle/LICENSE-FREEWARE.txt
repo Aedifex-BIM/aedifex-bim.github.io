@@ -1,0 +1,23 @@
+Aedifex freeware licence
+
+Copyright (c) 2026 Sompote Youwai. All rights reserved.
+
+Aedifex is freeware. You may download, install and use it free of charge, for any
+purpose, including commercial and professional work, on as many computers as you like.
+The models, drawings, IFC files and other output you make with Aedifex are yours.
+
+You may copy and pass on the download zip to others, provided you pass it on unchanged
+and free of charge, with this licence included.
+
+You may not sell Aedifex, charge for it, or bundle it in a product that is sold. You may
+not modify, decompile, disassemble or otherwise reverse engineer it, except where the
+law allows this despite this licence.
+
+Aedifex is provided "as is", without warranty of any kind, express or implied, including
+fitness for a particular purpose. The author is not liable for any loss or damage arising
+from its use. Aedifex is a modelling aid: designs, quantities and structural results must
+be checked by a qualified professional before they are used.
+
+Aedifex includes third-party components under their own open-source licences, listed in
+THIRD-PARTY-NOTICES.txt. Those licences apply to those components and are not limited by
+this licence.
