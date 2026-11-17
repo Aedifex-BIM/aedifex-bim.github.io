@@ -154,6 +154,8 @@ main > section { padding: var(--s8) var(--gutter); max-width: var(--maxw); margi
 .lede { margin: var(--s5) 0 0; max-width: 46ch; color: var(--text-dim); font-size: var(--fs-lg); line-height: 1.5; }
 .cta { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s6); }
 .fine { margin: var(--s4) 0 0; color: var(--text-faint); font-size: var(--fs-sm); }
+.textlink { color: var(--text-dim); text-underline-offset: 3px; }
+.textlink:hover { color: var(--signal); }
 
 .stage {
   margin: 0; border: var(--hair); border-radius: var(--r); background: var(--ink-1);

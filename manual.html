@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aedifex manual</title>
+<meta name="description" content="How to use Aedifex: modelling, structure and rebar, drawings and schedules, the built-in agent, MCP for Claude Code, Codex and Claude Desktop, Pondus, and the Tellus programs.">
+<meta name="theme-color" content="#0d0f11">
+<link rel="icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="manual.css">
+<script>document.documentElement.classList.add("js");</script>
+<script src="manual.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <a class="brand" href="index.html" aria-label="Aedifex home">
+    <img src="img/icon-256.png" alt="" width="28" height="28">
+    <span>Aedifex</span>
+  </a>
+  <nav class="nav" aria-label="Site">
+    <a href="index.html">Home</a>
+    <a href="manual.html" aria-current="page">Manual</a>
+    <a href="index.html#download">Download</a>
+  </nav>
+  <a class="btn btn-signal btn-sm" href="index.html#download">Download free</a>
+</header>
+
+<div class="man" id="main">
+  <aside class="toc" aria-label="Contents">
+    <p class="mono toc-k">Manual · v0.1.0</p>
+    <ol>
+      <li><a href="#install">Install</a></li>
+      <li><a href="#window">The window</a></li>
+      <li><a href="#model">Modelling</a></li>
+      <li><a href="#edit">Editing</a></li>
+      <li><a href="#structure">Structure and rebar</a></li>
+      <li><a href="#documents">Drawings and schedules</a></li>
+      <li><a href="#exchange">Import and export</a></li>
+      <li><a href="#assistant">The Assistant</a></li>
+      <li><a href="#mcp">MCP: your own agent</a></li>
+      <li><a href="#pondus">Pondus</a></li>
+      <li><a href="#tellus">Tellus and the other programs</a></li>
+      <li><a href="#trouble">When something goes wrong</a></li>
+    </ol>
+  </aside>
+
+  <article class="doc">
+    <header class="doc-head">
+      <p class="kicker"><span class="bubble" aria-hidden="true">M</span>User manual</p>
+      <h1>How to use Aedifex</h1>
+      <p class="lede">Aedifex was built agent first: every action in the window is a command an agent can call too. This manual covers both ways in, by hand and by agent, and how Aedifex works with Pondus and the Tellus programs.</p>
+    </header>
+
+    <!-- 1 -->
+    <section id="install" aria-labelledby="h-install">
+      <h2 id="h-install"><span class="num mono">01</span>Install</h2>
+      <h3>macOS</h3>
+      <ol class="steps">
+        <li>Download <span class="mono">Aedifex-0.1.0-macos-universal.zip</span> from the <a href="index.html#download">download section</a> and open it.</li>
+        <li>Move <span class="mono">Aedifex.app</span> to <span class="mono">Applications</span>.</li>
+        <li>The first time, right-click the app, choose <b>Open</b>, then <b>Open</b> again. The app is signed on our side but not notarised with Apple, so macOS asks once. If it still refuses, run:
+<pre class="code"><code>xattr -dr com.apple.quarantine /Applications/Aedifex.app</code></pre></li>
+      </ol>
+      <h3>Windows</h3>
+      <ol class="steps">
+        <li>Download <span class="mono">Aedifex-0.1.0-windows-x86_64.zip</span> and extract it to a folder of your own, for example <span class="mono">C:\Aedifex</span>.</li>
+        <li>Run <span class="mono">aedifex.exe</span>. If SmartScreen warns you, choose <b>More info</b>, then <b>Run anyway</b>.</li>
+      </ol>
+      <p>The zip also holds <span class="mono">examples/</span>: a sample house, a Thai family house, an office with its rebar and a seven-storey tower. Open one with <b>File › Open</b>, or drop it on the window.</p>
+      <p class="note">The same program is the app, the MCP server (<span class="mono">aedifex --mcp</span>) and a command line (<span class="mono">aedifex export-ifc model.aedifex out.ifc</span>, <span class="mono">aedifex import project.rvt out.aedifex</span>).</p>
+    </section>
+
+    <!-- 2 -->
+    <section id="window" aria-labelledby="h-window">
+      <h2 id="h-window"><span class="num mono">02</span>The window</h2>
+      <figure class="fig"><img src="img/manual/window.jpg" alt="The Aedifex window: top bar, project browser and properties on the left, the floor plan with the tool strip and the options card, the Assistant on the right, the status bar" width="1480" height="900" loading="lazy"><figcaption>The sample house in a floor plan, the Wall group of the tool strip open.</figcaption></figure>
+      <dl class="parts">
+        <div><dt>Top bar</dt><dd>File, Edit, View and Analyze menus; Undo and Redo; the views (Floor plan, 3D, Schedules, and Section or Sheet when one is open); <b>Analyze</b> for a frame analysis; <b>Assistant</b> to open the agent; the light or dark theme.</dd></div>
+        <div><dt>Project browser</dt><dd>Floor plans per level (right-click a level to copy it to another level, rename or delete it), visibility of structure and architecture, 3D views, schedules, sections, elevations and sheets, masses and CAD underlays, and the families in the project.</dd></div>
+        <div><dt>Properties</dt><dd>What is selected: its type (change it in the list), its values, its phase and its project parameters. <b>Edit Type</b> changes the type, and every element of that type follows.</dd></div>
+        <div><dt>Tool strip</dt><dd>Select and Pan, then one button per group. A small corner mark means a group: click it to open the group beside the strip and pick a tool. The button then shows the tool you used last from it.</dd></div>
+        <div><dt>Options card</dt><dd>At the top of the view: the active tool's type and values (height, sill, offset), or the 3D view's style, section cut and sun.</dd></div>
+        <div><dt>Status bar</dt><dd>Ready or what is happening, the last message, how to use the view, the cursor's coordinates.</dd></div>
+      </dl>
+      <p>Units are metres for lengths, and kN and kPa for loads. In a plan, scroll to pan and pinch or Ctrl-scroll to zoom. In 3D, drag to orbit and Shift-drag or right-drag to pan.</p>
+    </section>
+
+    <!-- 3 -->
+    <section id="model" aria-labelledby="h-model">
+      <h2 id="h-model"><span class="num mono">03</span>Modelling</h2>
+      <p>Pick a tool, then click in a floor plan. Tools that draw a line or an outline (wall, beam, railing, floor, roof, ceiling, room, shaft) take one click per point; press <b>Enter</b>, double-click or right-click to finish, and <b>Esc</b> to stop. Doors and windows go on a wall: click the wall. Columns, footings and components take one click each, and <b>Space</b> turns a component by 90°.</p>
+      <p class="note">Draw outer walls <b>clockwise</b> (seen from above). A wall's exterior side is the left of its start to end, as in Revit and IFC, so a clockwise loop puts the exterior layer outside. The flip arrows and <b>Flip sides</b> in the Modify card turn a wall round.</p>
+      <p>A <b>curved wall</b>: in the Wall tool choose <b>Arc</b> in the options card, click the start, the end, then a point on the arc. Its angle and radius are in Properties.</p>
+      <div class="table-wrap">
+        <table class="keys">
+          <caption>Tool groups and their shortcuts (type the two letters in a plan)</caption>
+          <thead><tr><th scope="col">Group</th><th scope="col">Tools</th></tr></thead>
+          <tbody>
+            <tr><td>Walls and openings</td><td>Wall <kbd>WA</kbd> · Door <kbd>DR</kbd> · Window <kbd>WN</kbd></td></tr>
+            <tr><td>Floors and roofs</td><td>Floor <kbd>SB</kbd> · Roof <kbd>RR</kbd> · Ceiling <kbd>CE</kbd> · Slab opening <kbd>OP</kbd> · Shaft <kbd>SF</kbd></td></tr>
+            <tr><td>Stairs and ramps</td><td>Stair <kbd>ST</kbd> · Ramp <kbd>RA</kbd> · Railing <kbd>RL</kbd></td></tr>
+            <tr><td>Structure</td><td>Column <kbd>CL</kbd> · Beam <kbd>BM</kbd> · Footing <kbd>FT</kbd> · Reinforce <kbd>RF</kbd></td></tr>
+            <tr><td>Furniture and masses</td><td>Component <kbd>CM</kbd> · Mass <kbd>MS</kbd></td></tr>
+            <tr><td>Rooms and grids</td><td>Room <kbd>RM</kbd> · Grid <kbd>GR</kbd></td></tr>
+            <tr><td>Site</td><td>Terrain <kbd>TS</kbd> · Graded slope <kbd>GS</kbd></td></tr>
+            <tr><td>Views and notes</td><td>Section <kbd>SE</kbd> · Elevation <kbd>EL</kbd> · Dimension <kbd>DI</kbd> · Tag <kbd>TG</kbd> · Text <kbd>TX</kbd> · Spot elevation <kbd>SP</kbd></td></tr>
+            <tr><td>Always</td><td>Select <kbd>V</kbd> · Pan <kbd>H</kbd></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><b>Types and families.</b> Walls, doors, windows, floors, roofs and columns take a type, chosen in the options card before you draw or in Properties after. <b>Edit › Family library</b> lists the families you can load; <b>New family…</b> opens the family editor, where you give parameters, solids with formulas and types, with a live preview.</p>
+      <p><b>Site.</b> Terrain takes survey points (click each and type its z) or contours, or <b>Import survey points…</b> from a CSV or TXT of x, y, z. A graded slope follows an alignment you draw, with its cross-section edited as a table of offset and level.</p>
+    </section>
+
+    <!-- 4 -->
+    <section id="edit" aria-labelledby="h-edit">
+      <h2 id="h-edit"><span class="num mono">04</span>Editing</h2>
+      <p>Select elements (Shift adds to the selection) and the <b>Modify</b> card appears at the foot of the plan. Each tool works by clicks, with a dashed preview, or by typed values and <b>Apply</b>. Walls joined at their ends stay joined, and doors and windows go with their wall.</p>
+      <div class="table-wrap">
+        <table class="keys">
+          <caption>Modify tools</caption>
+          <tbody>
+            <tr><td>Move <kbd>MV</kbd></td><td>a base point, then where it goes</td></tr>
+            <tr><td>Copy <kbd>CO</kbd></td><td>the same, with a number of copies</td></tr>
+            <tr><td>Rotate <kbd>RO</kbd></td><td>a start ray, then an end ray (snaps to 5°); Place centre for another pivot</td></tr>
+            <tr><td>Mirror <kbd>MM</kbd></td><td>two clicks for the axis</td></tr>
+            <tr><td>Array <kbd>AR</kbd></td><td>linear, or round a centre</td></tr>
+            <tr><td>Offset <kbd>OF</kbd></td><td>walls, beams or grids by a distance</td></tr>
+            <tr><td>Corner <kbd>TR</kbd></td><td>trim or extend two walls or beams to a corner, clicking the parts to keep</td></tr>
+            <tr><td>Split <kbd>SL</kbd></td><td>a wall or a beam at a point</td></tr>
+            <tr><td>Align <kbd>AL</kbd></td><td>a reference line, then the line to bring onto it</td></tr>
+            <tr><td>Delete <kbd>DE</kbd></td><td>also the Delete key</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Two or more beams in one line can be merged into one; a selected pitched roof can be framed in steel (<b>Frame roof</b>). Every edit is all or nothing: if it would leave a door outside its wall, nothing changes and the status bar says why.</p>
+    </section>
+
+    <!-- 5 -->
+    <section id="structure" aria-labelledby="h-structure">
+      <h2 id="h-structure"><span class="num mono">05</span>Structure and rebar</h2>
+      <ol class="steps">
+        <li>Draw the <b>grids</b>, then use <b>Column</b> and <b>Beam</b>: in their options, <b>At grids</b> puts a column at every grid crossing and <b>On grids</b> a beam between every two neighbouring crossings.</li>
+        <li><b>Footing</b> places pad footings under all columns of a level, and wall footings under the walls.</li>
+        <li>Mark load-bearing walls and slabs <b>structural</b> in Properties, so they carry load in the analysis.</li>
+        <li><b>Analyze</b> in the top bar checks the frame (Stabileo, if installed); <b>Analyze › Design in Pondus…</b> designs it and places the bars (see <a href="#pondus">Pondus</a>).</li>
+      </ol>
+      <p><b>Reinforce by hand.</b> Select a beam, column, slab, wall or footing and press <kbd>RF</kbd>. The card takes the bars as an engineer writes them, for example <span class="mono">3-DB20</span> bottom, <span class="mono">2-DB16</span> top, stirrups <span class="mono">ends: RB9 @ 100 mm, middle: RB9 @ 200 mm</span>, with hooks, bent-up bars and cover. <b>Apply</b> places them, <b>Check bars (ACI)</b> checks them rule by rule against ACI 318-19 with the clause, and <b>Save preset</b> keeps the fields for the next element of that kind. DB means deformed bar SD40, RB round bar SR24.</p>
+      <p><b>See the bars.</b> In 3D tick <b>Rebar</b>; in plans use <b>View › Bars in plans</b>; a section cuts them as dots. Select an element and press <b>Structural drawing</b> in Properties for its elevation and sections with the bars, exportable as DXF, SVG or PNG.</p>
+      <p><b>Bar bending schedule.</b> In Schedules, the bar schedule lists each bar mark with its shape code, number, cut length (with the ACI bend allowances) and weight, then totals per bar size. Steel members have a take-off in kilograms per section. Both export to xlsx or CSV.</p>
+    </section>
+
+    <!-- 6 -->
+    <section id="documents" aria-labelledby="h-documents">
+      <h2 id="h-documents"><span class="num mono">06</span>Drawings and schedules</h2>
+      <p><b>Sections and elevations.</b> Section tool <kbd>SE</kbd>: click the start and end of the cut; it looks to the left of the line you draw. Elevation <kbd>EL</kbd>: click outside the building, or <b>+ North, south, east, west</b> in the browser. Open them from the browser; their card has Dimension, Text, Spot elevation, <b>Tag all</b>, and export.</p>
+      <p><b>Sheets.</b> In the browser, <b>+ Sheet</b>, pick a paper size, then place views at a scale and drag them where you want them. Fill in the title block, then <b>Print to PDF</b> (one page per sheet), SVG or PNG.</p>
+      <p><b>Schedules.</b> Quick schedules of walls, doors, windows, rooms and the rest are always there. <b>+ Schedule</b> makes your own: choose the category and the columns, add a calculated column with a formula (<span class="mono">Area * 120</span>), keep rows by a condition, group and total. <b>Parameters…</b> adds your own fields to elements or types; they show in Properties, schedules and the IFC export.</p>
+    </section>
+
+    <!-- 7 -->
+    <section id="exchange" aria-labelledby="h-exchange">
+      <h2 id="h-exchange"><span class="num mono">07</span>Import and export</h2>
+      <dl class="parts">
+        <div><dt>Revit</dt><dd><b>File › Open Revit…</b> reads .rvt files of Revit 2023 or newer, without Revit. Walls, doors, windows, floors, columns and rooms that match their geometry become Aedifex elements; the rest come in as imported shapes.</dd></div>
+        <div><dt>IFC</dt><dd><b>File › Import IFC…</b> reads IFC2x3 and IFC4; <b>Insert IFC into this model…</b> adds a file to the open one. <b>File › Export › IFC4</b> writes it back; in Revit use Insert › Link IFC or Open › IFC.</dd></div>
+        <div><dt>CAD</dt><dd><b>File › Import CAD (DXF)…</b> places a drawing under a plan to trace over, with its layers on or off.</dd></div>
+        <div><dt>3D models</dt><dd><b>File › Import 3D model…</b> takes OBJ (with its MTL colours) and glTF or GLB.</dd></div>
+        <div><dt>Exports</dt><dd>IFC4, PDF sheets, drawings as DXF, SVG or PNG, schedules as xlsx or CSV, renders as PNG, and the 3D mesh (.axmesh) for TellusHive's viewer.</dd></div>
+      </dl>
+    </section>
+
+    <!-- 8 -->
+    <section id="assistant" aria-labelledby="h-assistant">
+      <h2 id="h-assistant"><span class="num mono">08</span>The Assistant</h2>
+      <p>The Assistant is an agent built into Aedifex, on the TellusHive engine. It plans, calls Aedifex's commands, looks at pictures of the model, and answers with what it did. It works on a copy of your model and the views follow it live; when it finishes, its whole run is one undo step.</p>
+      <h3>Set it up once</h3>
+      <ol class="steps">
+        <li>Press <b>Assistant</b> in the top bar, then the gear in the Assistant panel.</li>
+        <li>Choose a provider. <b>OpenRouter</b>, <b>OpenAI-compatible</b> and <b>DeepSeek</b> need an API key; <b>Ollama</b> and <b>vLLM</b> run models on your own machine or server. Give the model name, the key, and press <b>Save</b>. Keys are stored only on this computer.</li>
+        <li>Or choose <b>Claude Code</b> or <b>Codex</b>: the coding agent you already have becomes the model, with Aedifex's tools over MCP. It needs the <span class="mono">claude</span> or <span class="mono">codex</span> program installed and logged in; Settings says whether it was found. For Claude Code, <b>My Claude subscription</b> uses your plan instead of an API key.</li>
+      </ol>
+      <figure class="fig narrow"><img src="img/providers.jpg" alt="Assistant settings with the model providers" width="720" height="392" loading="lazy"><figcaption>Assistant settings with Claude Code chosen.</figcaption></figure>
+      <h3>Talk to it</h3>
+      <p>Write what you want in the box and press Enter. Each tool call shows as a row you can open. <b>Stop</b> cancels and keeps your model as it was; <b>Undo</b> takes back the whole run. The paperclip attaches a sketch, a photo of a plan, a PDF, a spreadsheet or a Word file. Select elements first and say "this" or "these".</p>
+<pre class="code"><code>Model a two-storey house 12 x 8 m with a living room, a kitchen and three bedrooms upstairs.
+Put a 400 x 400 column at every grid crossing and 300 x 600 beams on the grids at Level 2.
+Design the structure in Pondus and show me the bars of this beam.
+Make a door schedule with width, height and fire rating, and export it to xlsx.</code></pre>
+      <p class="note">The Assistant does not export files, render or run analyses you did not ask for; it offers them instead. Check what it builds, as you would a junior's drawing.</p>
+    </section>
+
+    <!-- 9 -->
+    <section id="mcp" aria-labelledby="h-mcp">
+      <h2 id="h-mcp"><span class="num mono">09</span>MCP: drive Aedifex from your own agent</h2>
+      <p>Aedifex is an MCP server already; you do not build one. Start it with <span class="mono">--mcp</span> and an agent gets 102 tools: every modelling, editing, structure, drawing and schedule command, plus pictures of the model, exports, Pondus design and IFC.</p>
+      <div class="table-wrap">
+        <table class="keys">
+          <caption>Command line of the MCP server</caption>
+          <tbody>
+            <tr><td><span class="mono">--mcp</span></td><td>serve MCP on standard input and output</td></tr>
+            <tr><td><span class="mono">--open model.aedifex</span></td><td>start from this model (also .rvt)</td></tr>
+            <tr><td><span class="mono">--autosave model.aedifex</span></td><td>write the model after every change</td></tr>
+            <tr><td><span class="mono">--deny tool_a,tool_b</span></td><td>tools the agent may not call</td></tr>
+            <tr><td><span class="mono">--pictures folder</span></td><td>where pictures of the model are written</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note"><b>Watch it work.</b> Give <span class="mono">--autosave</span> the same file you have open in the window. The window reloads the file whenever the agent writes it, so you see the model change as the agent works.</p>
+
+      <h3>Claude Code</h3>
+<pre class="code"><code>claude mcp add aedifex -- /Applications/Aedifex.app/Contents/MacOS/aedifex \
+  --mcp --open ~/Projects/house.aedifex --autosave ~/Projects/house.aedifex</code></pre>
+      <p>On Windows give the path of <span class="mono">aedifex.exe</span>, for example <span class="mono">C:\Aedifex\aedifex.exe</span>.</p>
+
+      <h3>Codex</h3>
+      <p>Add to <span class="mono">~/.codex/config.toml</span>:</p>
+<pre class="code"><code>[mcp_servers.aedifex]
+command = "/Applications/Aedifex.app/Contents/MacOS/aedifex"
+args = ["--mcp", "--autosave", "/Users/you/Projects/house.aedifex"]
+default_tools_approval_mode = "approve"</code></pre>
+
+      <h3>Claude Desktop</h3>
+      <p>In <span class="mono">~/Library/Application Support/Claude/claude_desktop_config.json</span> (Windows: <span class="mono">%APPDATA%\Claude\claude_desktop_config.json</span>):</p>
+<pre class="code"><code>{
+  "mcpServers": {
+    "aedifex": {
+      "command": "/Applications/Aedifex.app/Contents/MacOS/aedifex",
+      "args": ["--mcp", "--autosave", "/Users/you/Projects/house.aedifex"]
+    }
+  }
+}</code></pre>
+      <p>Any other MCP client works the same way: the command is the Aedifex program, the first argument <span class="mono">--mcp</span>. Start a session with "get the model summary", then ask for what you want.</p>
+    </section>
+
+    <!-- 10 -->
+    <section id="pondus" aria-labelledby="h-pondus">
+      <h2 id="h-pondus"><span class="num mono">10</span>Pondus</h2>
+      <p><a href="https://strpondus.github.io/">Pondus</a> is the structural analysis and design program that Aedifex hands its structure to. Aedifex finds it at <span class="mono">/Applications/Pondus.app</span>; elsewhere, set the environment variable <span class="mono">PONDUS_BIN</span> to the pondus program.</p>
+      <h3>Design from Aedifex</h3>
+      <ol class="steps">
+        <li>Model the frame: columns, beams, structural slabs and walls, footings (or pile caps).</li>
+        <li><b>Analyze › Design in Pondus…</b>. Give the loads (finishes, live, roof live), f'c, fy and fyt, the covers, the allowable bearing pressure, and what to design: slabs, walls, footings, stairs, steel sections (AISC 360-16 or EC3).</li>
+        <li><b>Run the design</b>. Pondus analyses (self-weight, 1.4D, 1.2D + 1.6L, D + L) and designs to ACI 318-19. Each element comes back with its utilisation, pass or fail; click a row to select the element.</li>
+        <li>With <b>Place bars</b> on, the bars go into the model as rebar and are checked against ACI 318-19. Sizes Pondus would change are reported, not applied.</li>
+      </ol>
+      <p>Two files are written next to your project: <span class="mono">&lt;project&gt;.pondus</span>, which opens in Pondus to see the analysis, and <span class="mono">&lt;project&gt;.design.json</span>, the design with its bars.</p>
+      <h3>Bring a Pondus design into Aedifex</h3>
+      <p>A design made in Pondus and exported for BIM (format <span class="mono">pondus-bim-1</span>) can be read into an Aedifex model with the same elements: ask the Assistant "put the bars of <span class="mono">design.json</span> into the model", or call the <span class="mono">reinforce</span> tool with its path. Elements are matched by their Aedifex id, or by position.</p>
+      <p class="note">An agent can also drive Pondus itself: <span class="mono">pondus --mcp</span> is an MCP server too. Add both to Claude Code and the agent can model in Aedifex and analyse in Pondus in one conversation.</p>
+    </section>
+
+    <!-- 11 -->
+    <section id="tellus" aria-labelledby="h-tellus">
+      <h2 id="h-tellus"><span class="num mono">11</span>Tellus and the other programs</h2>
+      <p>Every program of the family is an MCP server with the same <span class="mono">--mcp</span> switch, so one agent can use several at once. Aedifex has no direct file link to the geotechnical programs; the agent is the link. It reads what it needs from one (footing sizes and loads, a building's footprint) and builds the model in the other.</p>
+      <h3>TellusHive</h3>
+      <p><a href="https://github.com/Sompote/TellusHive">TellusHive</a> is a desktop of agents for engineering. It finds Aedifex at <span class="mono">/Applications/Aedifex.app</span> on its own and gives its agents Aedifex's tools, next to Tellus, Tellus3D, Pondus and the others. Its output panel shows the BIM model in 3D from Aedifex's mesh export.</p>
+      <h3>One agent, several programs</h3>
+<pre class="code"><code>claude mcp add aedifex -- /Applications/Aedifex.app/Contents/MacOS/aedifex --mcp
+claude mcp add pondus  -- /Applications/Pondus.app/Contents/MacOS/pondus --mcp
+claude mcp add tellus  -- /Applications/Tellus.app/Contents/MacOS/tellus --mcp</code></pre>
+      <p>Then, for example: "Take the footings and column loads of the Aedifex model, and check the settlement of footing F3 in Tellus on this borehole."</p>
+      <div class="table-wrap">
+        <table class="keys">
+          <caption>Programs that work alongside Aedifex</caption>
+          <tbody>
+            <tr><td><a href="https://strpondus.github.io/">Pondus</a></td><td>structural analysis and design; see <a href="#pondus">Pondus</a></td></tr>
+            <tr><td><a href="https://tellusfem.github.io/">Tellus</a></td><td>2D geotechnical finite elements: excavations, embankments, foundations on soil</td></tr>
+            <tr><td>Tellus3D</td><td>3D geotechnical finite elements: piled rafts, tunnels, deep excavations</td></tr>
+            <tr><td><a href="https://motus-app.github.io/">Motus</a></td><td>1D seismic site response, design spectra</td></tr>
+            <tr><td><a href="https://granumfl.github.io/">GranumFL</a></td><td>grains and water: debris flows, run-out, scour</td></tr>
+            <tr><td>CADCraft</td><td>2D CAD: structural drawings open in it from Aedifex (<b>Open in CADCraft</b>; start CADCraft with <span class="mono">--control 7979</span>)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section id="trouble" aria-labelledby="h-trouble">
+      <h2 id="h-trouble"><span class="num mono">12</span>When something goes wrong</h2>
+      <dl class="parts">
+        <div><dt>macOS says the app is damaged or from an unidentified developer</dt><dd>Right-click › Open, or run the <span class="mono">xattr</span> line from <a href="#install">Install</a>.</dd></div>
+        <div><dt>The brick is on the inside of my walls</dt><dd>The walls were drawn anticlockwise. Select them and use <b>Flip sides</b> in the Modify card.</dd></div>
+        <div><dt>"Pondus was not found"</dt><dd>Install Pondus in Applications, or set <span class="mono">PONDUS_BIN</span> to the pondus program.</dd></div>
+        <div><dt>Claude Code or Codex not found</dt><dd>Install it and log in once in a terminal (<span class="mono">claude</span> or <span class="mono">codex</span>), or give its path in the Assistant settings.</dd></div>
+        <div><dt>The agent's changes do not show in the window</dt><dd>Use the same file for <span class="mono">--autosave</span> as the one open in the window, and save your own changes first: the window does not reload over unsaved edits.</dd></div>
+        <div><dt>An edit does nothing</dt><dd>Read the status bar: an edit that would leave a door outside its wall or a zero-length wall is refused, and the model stays as it was.</dd></div>
+      </dl>
+      <p class="note">Aedifex is a modelling aid. Designs, quantities and structural results must be checked by a qualified engineer before they are used.</p>
+    </section>
+  </article>
+</div>
+
+<footer class="colophon">
+  <div class="colo-grid">
+    <p class="colo-mark"><img src="img/icon-256.png" alt="" width="40" height="40"> Aedifex</p>
+    <p>Made at AI Research Group, KMUTT. Some modelling features follow the open-source BIMCraft project; the agent runs on the TellusHive engine.</p>
+    <p class="mono">© 2026 Sompote Youwai · freeware</p>
+  </div>
+</footer>
+</body>
+</html>
