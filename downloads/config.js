@@ -3,7 +3,7 @@ window.AEDIFEX_DOWNLOADS = {
   version: "0.1.0",
   date: "2026-11-17",
   files: {
-    mac: { url: "downloads/Aedifex-0.1.0-macos-universal.zip", size: "33.7 MB", meta: "Universal (Apple silicon + Intel) · macOS 11+", sha256: "4aaf6e8b3e64b6b38f90bfbe5a0e07f9704906cbb17ef0ea5e58db48a3eeea1e" },
-    win: { url: "downloads/Aedifex-0.1.0-windows-x86_64.zip", size: "21.6 MB", meta: "x86_64 · Windows 10+", sha256: "82a90fc778a05e653af8d6e08de7a72641625641b3edc49a87cd32bcfac88d88" }
+    mac: { url: "downloads/Aedifex-0.1.0-macos-universal.zip", size: "33.7 MB", meta: "Universal (Apple silicon + Intel) · macOS 11+", sha256: "aa9a8e4ce914879850f3801eee7d8e8a77c760d6fd16dcbd71ea45971aa6b057" },
+    win: { url: "downloads/Aedifex-0.1.0-windows-x86_64.zip", size: "21.6 MB", meta: "x86_64 · Windows 10+", sha256: "512068c902a0fd6d566a70c24f73c41c2c5b3e934c2225b2166fc9222f6d4661" }
   },
 };
